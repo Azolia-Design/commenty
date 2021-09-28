@@ -25820,7 +25820,7 @@ jquery_default()(document).ready(function () {
       var textWork = {
         slides: document.querySelectorAll('.scworks__text-list .title'),
         list: document.querySelector('.scworks__text-list .inner'),
-        duration: 0.3,
+        duration: 0.5,
         height: document.querySelector('.scworks__text-list .title').offsetHeight
       }; // vSlide.set(textWork.list,{ yPercent: 100, autoAlpha: 0 });
       // vSlide.to(textWork.list, 0.6, { yPercent: 0, autoAlpha: 1 });
@@ -25829,18 +25829,15 @@ jquery_default()(document).ready(function () {
         var label = "slide" + i;
         vSlide.add(label);
         vSlide.to(textWork.list, {
-          duration: textWork.duration,
-          y: i * -1 * textWork.height
+          duration: textWork.duration
         }, label);
         var items = slide;
         vSlide.from(items, {
-          duration: textWork.duration * 2,
-          y: textWork.height,
+          duration: textWork.duration,
           autoAlpha: 0
         }, label);
         vSlide.to(items, {
-          duration: textWork.duration * 2,
-          y: -textWork.height,
+          duration: textWork.duration,
           autoAlpha: 0
         }, "+=1.2");
       });
