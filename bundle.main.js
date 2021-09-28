@@ -25496,6 +25496,14 @@ jquery_default()(document).ready(function () {
       smooth: false
     }
   });
+
+  if (window.location.hash) {
+    locoScroll.scrollTo(0);
+    setTimeout(function () {
+      locoScroll.scrollTo(window.location.hash);
+    }, 1);
+  }
+
   locoScroll.on("scroll", ScrollTrigger.update);
   locoScroll.on('scroll', function (instance) {
     if (jquery_default()('html').hasClass('has-scroll-smooth')) {
