@@ -25750,10 +25750,14 @@ jquery_default()(document).ready(function () {
     ////////////////// INTERACTION SECTION WORK ////////////////////
     var eleWork = {
       sectionWork: jquery_default()('.scworks'),
-      titleWork: jquery_default()('.scworks__steps-textbox .--fadeInTop .char'),
-      numberContentWork: jquery_default()('.scworks .item__number.--fadeLeftRight .char'),
+      //titleWork: $('.scworks__steps-textbox .--fadeInTop .char'),
+      labelWork: jquery_default()('.scworks__steps-textbox .label.--fadeInTop'),
+      titleWork: jquery_default()('.scworks__steps-textbox .title.--fadeInTop .char'),
+      //numberContentWork: $('.scworks .item__number.--fadeLeftRight .char'),
+      numberContentWork: jquery_default()('.scworks .item__number.--fadeLeftRight'),
       textContentWork: jquery_default()('.scworks .item__text .--fadeInTop .char'),
       titleContentWork: jquery_default()('.scworks .scworks__text-title.--fadeInTop .char'),
+      contentWorkSlides: jquery_default()('.scworks .scworks__text-list'),
       duration: 0.6
     };
 
@@ -25769,18 +25773,27 @@ jquery_default()(document).ready(function () {
           vSlide.play();
         }
       });
-      tlContentWork.from(eleWork.titleWork, eleWork.duration, {
+      tlContentWork //.from(eleWork.titleWork, eleWork.duration, { y: 100, stagger: 0.015 })
+      .from(eleWork.labelWork, eleWork.duration, {
         y: 100,
-        stagger: 0.015
-      }).from(eleWork.numberContentWork, eleWork.duration, {
+        autoAlpha: 0
+      }).from(eleWork.titleWork, eleWork.duration, {
+        y: 100,
+        stagger: 0.015,
+        autoAlpha: 0
+      }, '-=0.7') //.from(eleWork.numberContentWork, eleWork.duration, { x: -100, stagger: 0.05 }, '-=0.7')
+      .from(eleWork.numberContentWork, eleWork.duration, {
         x: -100,
-        stagger: 0.05
+        autoAlpha: 0
       }, '-=0.7').from(eleWork.textContentWork, eleWork.duration, {
         y: 50,
         stagger: 0.002
       }, '-=0.8').from(eleWork.titleContentWork, eleWork.duration, {
         y: 100,
         stagger: 0.01
+      }, '-=0.8').from(eleWork.contentWorkSlides, eleWork.duration, {
+        y: 50,
+        autoAlpha: 0
       }, '-=0.8');
     }
   } ///////////////////// ANIMATION REPEAT WORD WORK //////////////////////
@@ -25797,10 +25810,9 @@ jquery_default()(document).ready(function () {
         list: document.querySelector('.scworks__text-list .inner'),
         duration: 0.3,
         height: document.querySelector('.scworks__text-list .title').offsetHeight
-      };
-      vSlide.to(textWork.list, 0.6, {
-        autoAlpha: 1
-      });
+      }; // vSlide.set(textWork.list,{ yPercent: 100, autoAlpha: 0 });
+      // vSlide.to(textWork.list, 0.6, { yPercent: 0, autoAlpha: 1 });
+
       textWork.slides.forEach(function (slide, i) {
         var label = "slide" + i;
         vSlide.add(label);
@@ -25808,20 +25820,52 @@ jquery_default()(document).ready(function () {
           duration: textWork.duration,
           y: i * -1 * textWork.height
         }, label);
-        var letters = slide.querySelectorAll('.char');
-        vSlide.from(letters, {
-          duration: textWork.duration,
+        var items = slide;
+        vSlide.from(items, {
+          duration: textWork.duration * 2,
           y: textWork.height,
-          stagger: 0.015
+          autoAlpha: 0
         }, label);
-        vSlide.to(letters, {
-          duration: textWork.duration,
+        vSlide.to(items, {
+          duration: textWork.duration * 2,
           y: -textWork.height,
-          stagger: 0.015
-        }, "+=2");
+          autoAlpha: 0
+        }, "+=1.2");
       });
     }
-  } // let textWork = $('.scworks__text-list .title'),
+  } // function animationRepeatTextWork() {
+  //     if ($('.scworks__text-list .title').length) {
+  //         let textWork = {
+  //             slides: document.querySelectorAll('.scworks__text-list .title'),
+  //             list: document.querySelector('.scworks__text-list .inner'),
+  //             duration: 0.3,
+  //             height: document.querySelector('.scworks__text-list .title').offsetHeight
+  //         }
+  //         vSlide.to(textWork.list, 0.6, { autoAlpha: 1 });
+  //         textWork.slides.forEach(function (slide, i) {
+  //             let label = "slide" + i;
+  //             vSlide.add(label);
+  //             vSlide.to(textWork.list, {
+  //                 duration: textWork.duration,
+  //                 y: i * -1 * textWork.height,
+  //             }, label);
+  //             let letters = slide.querySelectorAll('.char');
+  //             vSlide.from(letters, {
+  //                 duration: textWork.duration,
+  //                 y: textWork.height,
+  //                 stagger: 0.015,
+  //                 autoAlpha: 0,
+  //             }, label);
+  //             vSlide.to(letters, {
+  //                 duration: textWork.duration,
+  //                 y: -textWork.height,
+  //                 stagger: 0.015,
+  //                 autoAlpha: 1,
+  //             }, "+=2");
+  //         });
+  //     }
+  // }
+  // let textWork = $('.scworks__text-list .title'),
   //     counterTextWork = 0;
   // function fadeRepeatText() {
   //     if (counterTextWork < textWork.length) {
