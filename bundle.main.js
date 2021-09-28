@@ -25517,46 +25517,48 @@ jquery_default()(document).ready(function () {
       header.addClass('--fixed');
     }
 
-    if (jquery_default()(window).width() >= 991) {
-      var activeSection = function activeSection() {
-        var whyUsTop = document.querySelector('section#whyUs').offsetTop - 100;
-        var howItWorkTop = document.querySelector('section#howItWork').offsetTop - 100;
-        var featuresTop = document.querySelector('section#features').offsetTop - 100;
-        headerLinks.removeClass('active');
+    if (jquery_default()('.homepage').length) {
+      if (jquery_default()(window).width() >= 991) {
+        var activeSection = function activeSection() {
+          var whyUsTop = document.querySelector('section#whyUs').offsetTop - 100;
+          var howItWorkTop = document.querySelector('section#howItWork').offsetTop - 100;
+          var featuresTop = document.querySelector('section#features').offsetTop - 100;
+          headerLinks.removeClass('active');
 
-        if (instance.scroll.y < howItWorkTop) {
-          jquery_default()('a[href="#home"]').addClass('active');
-        } else if (instance.scroll.y < whyUsTop) {
-          jquery_default()('a[href="#howItWork"]').addClass('active');
-        } else if (instance.scroll.y < featuresTop) {
-          jquery_default()('a[href="#whyUs"]').addClass('active');
-        } else {
-          jquery_default()('a[href="#features"]').addClass('active');
-        }
-      };
+          if (instance.scroll.y < howItWorkTop) {
+            jquery_default()('a[href="#home"]').addClass('active');
+          } else if (instance.scroll.y < whyUsTop) {
+            jquery_default()('a[href="#howItWork"]').addClass('active');
+          } else if (instance.scroll.y < featuresTop) {
+            jquery_default()('a[href="#whyUs"]').addClass('active');
+          } else {
+            jquery_default()('a[href="#features"]').addClass('active');
+          }
+        };
 
-      ;
-      activeSection();
-    } else {
-      var activeSectionMobile = function activeSectionMobile() {
-        var whyUsTop = document.querySelector('section#whyUs').offsetTop - 100;
-        var howItWorkTop = document.querySelector('section#howItWork').offsetTop - 100;
-        var featuresTop = document.querySelector('section#features').offsetTop - 100;
-        navLinks.removeClass('active');
+        ;
+        activeSection();
+      } else {
+        var activeSectionMobile = function activeSectionMobile() {
+          var whyUsTop = document.querySelector('section#whyUs').offsetTop - 100;
+          var howItWorkTop = document.querySelector('section#howItWork').offsetTop - 100;
+          var featuresTop = document.querySelector('section#features').offsetTop - 100;
+          navLinks.removeClass('active');
 
-        if (instance.scroll.y < howItWorkTop) {
-          jquery_default()('a[href="#home"]').addClass('active');
-        } else if (instance.scroll.y < whyUsTop) {
-          jquery_default()('a[href="#howItWork"]').addClass('active');
-        } else if (instance.scroll.y < featuresTop) {
-          jquery_default()('a[href="#whyUs"]').addClass('active');
-        } else {
-          jquery_default()('a[href="#features"]').addClass('active');
-        }
-      };
+          if (instance.scroll.y < howItWorkTop) {
+            jquery_default()('a[href="#home"]').addClass('active');
+          } else if (instance.scroll.y < whyUsTop) {
+            jquery_default()('a[href="#howItWork"]').addClass('active');
+          } else if (instance.scroll.y < featuresTop) {
+            jquery_default()('a[href="#whyUs"]').addClass('active');
+          } else {
+            jquery_default()('a[href="#features"]').addClass('active');
+          }
+        };
 
-      ;
-      activeSectionMobile();
+        ;
+        activeSectionMobile();
+      }
     }
   });
   ScrollTrigger.matchMedia({
@@ -25577,38 +25579,40 @@ jquery_default()(document).ready(function () {
     }
   }); //Scroll to Section
 
-  if (jquery_default()(window).width() >= 991) {
-    var scrollTo = function scrollTo() {
-      if (!locoScroll) return;
-      jquery_default()('.header .header__nav li a').click(function (e) {
-        e.preventDefault();
-        var target = jquery_default()(this).attr('href');
-        locoScroll.scrollTo(target);
-        headerLinks.removeClass('active');
-        jquery_default()(this).addClass('active');
-      });
-    };
-
-    ;
-    scrollTo();
-  } else {
-    var _scrollTo = function _scrollTo() {
-      if (!locoScroll) return;
-      jquery_default()('.navmobile .navmobile__inner li a').click(function (e) {
-        e.preventDefault();
-        var target = jquery_default()(this).attr('href');
-        btnCloseMobile.click();
-        setTimeout(function () {
+  if (jquery_default()('.homepage').length) {
+    if (jquery_default()(window).width() >= 991) {
+      var scrollTo = function scrollTo() {
+        if (!locoScroll) return;
+        jquery_default()('.header .header__nav li a').click(function (e) {
+          e.preventDefault();
+          var target = jquery_default()(this).attr('href');
           locoScroll.scrollTo(target);
-        }, 500);
-        navLinks.removeClass('active');
-        jquery_default()(this).addClass('active');
-      });
-    };
+          headerLinks.removeClass('active');
+          jquery_default()(this).addClass('active');
+        });
+      };
 
-    ;
+      ;
+      scrollTo();
+    } else {
+      var _scrollTo = function _scrollTo() {
+        if (!locoScroll) return;
+        jquery_default()('.navmobile .navmobile__inner li a').click(function (e) {
+          e.preventDefault();
+          var target = jquery_default()(this).attr('href');
+          btnCloseMobile.click();
+          setTimeout(function () {
+            locoScroll.scrollTo(target);
+          }, 500);
+          navLinks.removeClass('active');
+          jquery_default()(this).addClass('active');
+        });
+      };
 
-    _scrollTo();
+      ;
+
+      _scrollTo();
+    }
   } ////////////////// INTERACTION SECTION PROSOL ////////////////////
   // let svgContainer = document.querySelector('.scprosol__circle-item.--pro');
   // var animItem = bodymovin.loadAnimation({
@@ -26013,12 +26017,12 @@ jquery_default()(document).ready(function () {
     });
     ScrollTrigger.refresh();
   } else {
-    sliderProSolMobile();
-    splitting_default()({
-      target: jquery_default()('.scworks__text-list .scworks__text-title'),
-      by: "chars",
-      key: null
-    });
+    sliderProSolMobile(); // Splitting({
+    //     target: $('.scworks__text-list .scworks__text-title'),
+    //     by: "chars",
+    //     key: null
+    // });
+
     animationRepeatTextWork();
   } ///////////////////////// WINDOW RESIZE ////////////////////////
 
